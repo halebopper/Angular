@@ -1,9 +1,17 @@
-var app = angular.module('behaviourApp', []);
+var app = angular.module('twitterApp', []);
+
+app.controller("AppCtrl", function($scope){
+    $scope.loadMoreTweets = function(){
+        alert("Loading tweets!");
+    }
+})
 
 app.directive("enter", function(){
     return function(scope, element, attrs){
         element.bind("mouseenter", function(){
-            element.addClass(attrs.enter);
+            //console.log("enter");
+            //element.addClass(attrs.enter);
+            scope.$apply(attrs.enter);
         })
     }
 })
