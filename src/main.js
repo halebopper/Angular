@@ -1,4 +1,4 @@
-var app = angular.module('twitterApp', []);
+var app = angular.module('superApp', []);
 
 app.controller("AppCtrl", function($scope){
     $scope.loadMoreTweets = function(){
@@ -6,20 +6,52 @@ app.controller("AppCtrl", function($scope){
     }
 })
 
-app.directive("enter", function(){
-    return function(scope, element, attrs){
-        element.bind("mouseenter", function(){
-            //console.log("enter");
-            //element.addClass(attrs.enter);
-            scope.$apply(attrs.enter);
-        })
-    }
+app.directive("superhero", function(){
+    return {
+        restrict: "E",
+        scope: {},
+        controller: function($scope){
+            $scope.abilities = [];
+            this.addStrength = function(){
+                $scope.abilities.push("strength");
+            }
+            this.addSpeed = function(){
+                $scope.abilities.push("speed");
+            }
+            this.addFlight = function(){
+                $scope.abilities.push("flight");
+            }
+        },
+        link: function(scope, element){
+            element.addClass("button");
+            element.bind("mouseenter", function(){
+                console.log(scope.abilities);
+            })
+        }
+    };
 })
 
-app.directive("leave", function(){
-    return function(scope, element, attrs){
-        element.bind("mouseleave", function(){
-            element.removeClass(attrs.enter);
-        })
+app.directive("strength", function(){
+    return {
+        require: "superhero",
+        link: function(scope, elements, attrs, superheroCtrl){
+            superheroCtrl.addStrength();
+        }
+    }
+})
+app.directive("speed", function(){
+    return {
+        require: "superhero",
+        link: function(scope, elements, attrs, superheroCtrl){
+            superheroCtrl.addSpeed();
+        }
+    }
+})
+app.directive("flight", function(){
+    return {
+        require: "superhero",
+        link: function(scope, element, attrs, superheroCtrl){
+            superheroCtrl.addFlight();
+        }
     }
 })
