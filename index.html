@@ -7,20 +7,10 @@
 
     <body>
 
-        <div ng-app="myApp">
-
-            <div ng-controller="AvengersCtrl">
-                <input type="text" ng-model="search.name">
-
-                <table>
-                    <tr ng-repeat="actor in avengers.cast | filter: search | limitTo: 5 | orderBy: '-name'">
-                        <td>{{actor.name | lowercase}}</td>
-                        <td>{{actor.character | uppercase}}</td>
-                    </tr>
-                </table>
-            </div>
-
+        <div ng-app="superhero">
+            <superman></superman>
         </div>
+
         <script type="text/javascript" src="lib/angular/angular.js"></script>
         <script type="text/javascript" src="src/main.js"></script>
 
