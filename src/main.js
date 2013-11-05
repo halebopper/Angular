@@ -6,21 +6,10 @@ app.controller("AppCtrl", function($scope){
     }
 })
 
-app.directive("phone", function(){
+app.directive("panel", function(){
     return {
         restrict: "E",
-        scope: {
-            number: "@",
-            network: "=",
-            makeCall: "&"
-        },
-        template: '<div class="panel">Number: {{number}} Network: <select ng-model="network" ng-options="net for net in networks"></select></div> ' +
-            '<input type="text" ng-model="value">' +
-            '<div class="button" ng-click="makeCall({number: number, message: value})">Call</div>',
-        link: function(scope) {
-            scope.networks = ["Verzion", "AT&T", "Spring"];
-            scope.network = scope.networks[0];
-        }
-
+        transclude: true,
+        template: '<div class="panel" ng-transclude>This is a panel component</div>'
     };
 })
