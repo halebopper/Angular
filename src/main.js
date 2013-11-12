@@ -4,28 +4,35 @@ app.config(function($routeProvider){
     $routeProvider
         .when('/', {
             templateUrl: "app.html",
-            controller: "AppCtrl"
+            controller: "AppCtrl",
+            resolve: {
+                loadData: app.loadData,
+                prepData: app.prepData
+            }
         })
 })
 
-app.controller("AppCtrl", function($scope, $q){
+app.controller("AppCtrl", function($scope, $route){
 
-    var defer = $q.defer();
-
-    defer.promise.then(function(weapon){
-        alert("You can have my "+weapon);
-        return "bow"
-    })
-    .then(function(weapon){
-        alert("And my " + weapon);
-        return "stick"
-    })
-    .then(function(weapon){
-        alert("And my " + weapon);
-    })
-    defer.resolve("sword");
+    console.log($route);
 
     $scope.model = {
         message: "This is my app!!!"
     }
 })
+
+app.loadData = function($q, $timeout){
+    var defer = $q.defer();
+    $timeout(function(){
+        defer.resolve("loadDataText");
+    }, 2000);
+    return defer.promise;
+}
+
+app.prepData = function($q, $timeout){
+    var defer = $q.defer();
+    $timeout(function(){
+        defer.resolve("prepDataText");
+    }, 2000);
+    return defer.promise;
+}
