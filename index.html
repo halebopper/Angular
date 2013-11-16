@@ -7,12 +7,9 @@
 
     <body style="padding: 20px, 20px; width: 200px;">
 
-        <div ng-app="app">
-            <div class="button"
-                    ng-repeat="item in 'somewords'.split('')"
-                    ng-click="$log.info($event)">
-                {{$index + 1}}. {{item}}
-                {{ev.pageX}}
+        <div ng-app="app" ng-controller="RoomCtrl as room">
+            <div class="button" ng-click="room.openDoor()">
+                {{room.buttonTitle}}
             </div>
         </div>
 
