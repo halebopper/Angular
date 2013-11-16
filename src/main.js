@@ -1,34 +1,25 @@
 var app = angular.module('app', []);
 
-//app.provider("game", function(){
-//    var type;
-//    return{
-//        setType: function(value){
-//            type = value;
-//        },
-//        $get: function(){
-//            return {
-//                title: type + "Craft"
-//            }
-//        }
-//    }
-//})
-
-
-//app.config(function(gameProvider){
-//    gameProvider.setType("War");
-//});
-
-app.factory("game", function(){
+app.directive('clock', function () {
     return {
-        title: "StarCraft"
+        restrict: 'E',
+        scope: {
+            timezone: "@"
+        },
+        template: "<div>12:00pm {{timezone}}</div>"
     }
 })
 
-
-app.controller("AppCtrl", function($scope, game, $injector){
-    $injector.invoke(function(game){
-        alert(game.title);
-    })
-    $scope.title = game.title;
+app.directive('panel', function () {
+    return {
+        restrict: 'E',
+        transclude: true,
+        scope: {
+            title: "@"
+        },
+        template: "<div style='border: 3px solid #000000'>" +
+            "<div class='alert-box'>{{title}}</div>" +
+            "<div ng-transclude></div>" +
+            "</div>"
+    }
 })
