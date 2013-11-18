@@ -8,12 +8,13 @@
 
     <body ng-app="app" ng-controller="AppCtrl as app" style="padding: 20px, 20px; width: 200px;">
 
-        <button class="btn" ng-click="app.toggle=!app.toggle">Toggle Animation</button>
+        <button class="btn" ng-click="app.fadeIt()">Toggle Animation</button>
 
-        <div class="toggle" ng-if="app.toggle"> Some content here</div>
+        <div class="badge" hide-me="app.isHidden">Some content here</div>
 
         <script type="text/javascript" src="lib/angular/angular.js"></script>
         <script type="text/javascript" src="lib/angular-animate/angular-animate.js"></script>
+        <script type="text/javascript" src="lib/greensock/src/uncompressed/TweenMax.js"></script>
         <script type="text/javascript" src="src/main.js"></script>
 
     </body>
